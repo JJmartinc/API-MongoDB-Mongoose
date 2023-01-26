@@ -88,8 +88,6 @@ let newEntry = {
     email: "guillermu@thebridgeschool.es",
     category: "sucesos"
 }
-
 createEntry(newEntry)
     .then(data => console.log(data))
     */
-

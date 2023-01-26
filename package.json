@@ -8,17 +8,29 @@
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
-  "author": "Alejandro Reyes",
+  "author": "Jorge Martin",
   "license": "ISC",
   "dependencies": {
     "cowsay": "^1.5.0",
     "express": "^4.18.2",
+    "install": "^0.13.0",
+    "mongodb": "^4.13.0",
     "mongoose": "^6.8.4",
     "node-fetch": "^2.6.7",
     "pg": "^8.8.0",
     "pug": "^3.0.2"
   },
   "devDependencies": {
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.20"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JJmartinc/API-MongoDB-Mongoose"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/JJmartinc/API-MongoDB-Mongoose"
+  },
+  "homepage": "https://github.com/JJmartinc/API-MongoDB-Mongoose"
 }

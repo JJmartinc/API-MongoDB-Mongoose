@@ -8,7 +8,7 @@ const productsApiRouter = express.Router();
 // GET http://localhost:3000/api/products/3
 // GET http://localhost:3000/api/products/4
 // GET http://localhost:3000/api/products
-productsApiRouter.get('/:id?',productsApiController.getProducts);
+productsApiRouter.get('/:title?',productsApiController.getProducts);
 
 /*Objeto de prueba para crear*/
 /*
@@ -20,12 +20,10 @@ productsApiRouter.get('/:id?',productsApiController.getProducts);
     "image": "https://estoyhechouncocinillas.com/wp-content/uploads/2015/08/tostadas_con_tomate.png"
 }
 */
-
-// POST http://localhost:3000/api/products
 productsApiRouter.post('/',checkApiKey,productsApiController.createProduct);
-
+//PUT
+productsApiRouter.put('/:id',checkApiKey,productsApiController.editProduct);
 // DELETE
+//http://localhost:3000/api/products/?API_KEY=123abc
 productsApiRouter.delete('/',checkApiKey, productsApiController.deleteProduct);
-
-
 module.exports = productsApiRouter;

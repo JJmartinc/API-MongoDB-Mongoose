@@ -1,31 +1,38 @@
 // Controlador - Lógica de negocio de la app
 const Product = require('../models/products');
 
-const getProducts = async (req,res) => {
-    if (req.params.id) { // con ID
-        try {
-            let product = await Product.find({id:req.params.id},'-_id -__v');
-            if (product.length > 0) {
-                res.status(200).json(product[0]); // Respuesta de la API para 1 producto
-            }
-            else {
-                res.status(404).json({msj:"producto no encontrado con ID "+req.params.id}); // Respuesta de la API para 1 producto
-            }    
+const getProducts = async (req, res) => {
+    if (req.params.title) {
+      // con ID
+    try {
+        let product = await Product.find({ title: req.params.title }, "-_id -__v")
+          .populate('provider', 'company_name url_web -_id'); // find({})devuelve por id menos los especificados despues de la coma (proyeccion)
+        if (product.length > 0) {
+          res.status(200).json(product[0]); // Respuesta de la API para 1 producto, no un array de objetos
+        } else {
+        res
+            .status(404)
+            .json({ msj: "Product not found " + req.params.title });
         }
-        catch(err){
-            res.status(400).json({msj: err.message});
-        }
-    } else { // sin ID --> TODOS los products
-        try {
-            // let products = await Product.find({}, {"_id" : 0,"__v":0}); // []
-            let products = await Product.find({},'-_id -__v');
-            res.status(200).json(products); // Respuesta de la API para muchos productos
-        }
-        catch(err){
-            res.status(400).json({msj: err.message});
-        }
+    } catch (err) {
+        res.status(400).json({
+        msj: err.message,
+        });
     }
-}
+    } else {
+      // sin ID --> TODOS los products
+    try {
+        let products = await Product.find({}, "-_id -__v")
+        .populate('provider','company_name url_web -_id')
+           // find({})devuelve todos
+        res.status(200).json(products); // Respuesta de la API para todos productos
+    } catch (err) {
+        res.status(400).json({
+        msj: err.message,
+        });
+    }
+    }
+};
 
 const createProduct = async (req,res) => {
     console.log("Esto es el console.log de lo que introducimos por postman", req.body); // Objeto recibido de producto nuevo
